@@ -1,0 +1,519 @@
+<!-- REFER TO poultry selling website design improvements on SPCK for more guides-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FeatherField Poultry — Healthy Birds, Smart Farming</title>
+  <meta name="description" content="Modern poultry farm management & online storefront. Batch tracking, sales dashboard, inventory, booking and contact." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --brand: #0f766e; --accent: #f59e0b; }
+    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+    .hero-overlay { background: linear-gradient(90deg, rgba(15,118,110,0.65), rgba(0,0,0,0.25)); }
+    .fade-end { position: relative; overflow: hidden; }
+    .fade-end::after { content: ''; position: absolute; right: 0; top: 0; width: 6rem; height: 100%; pointer-events: none; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1)); }
+    /* small transitions */
+    .hover-lift:hover { transform: translateY(-4px); transition: transform .18s ease; }
+    /* cart badge */
+    .cart-badge { background: var(--accent); color: white; border-radius: 999px; font-weight: 700; padding: 0.15rem 0.45rem; font-size: 0.75rem; }
+    /* simple modal */
+    .modal-backdrop { background: rgba(0,0,0,0.5); }
+  </style>
+</head>
+<body class="antialiased bg-gray-50 text-gray-800">
+  <!-- NAVBAR -->
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-4">
+          <img src="https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?auto=format&fit=crop&w=200&q=60" alt="FeatherField logo" class="w-10 h-10 rounded-md object-cover" />
+          <div>
+            <a href="#" class="text-lg font-extrabold tracking-tight">FeatherField</a>
+            <div class="text-xs text-gray-500 -mt-1">Poultry • Farm Management • Sales</div>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="#features" class="hover:text-[color:var(--brand)]">Features</a>
+          <a href="#inventory" class="hover:text-[color:var(--brand)]">Inventory</a>
+          <a href="#market" class="hover:text-[color:var(--brand)]">Shop</a>
+          <a href="#pricing" class="hover:text-[color:var(--brand)]">Pricing</a>
+          <a href="#contact" class="hover:text-[color:var(--brand)]">Contact</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#booking" class="hidden md:inline-block px-4 py-2 rounded-md bg-[color:var(--brand)] text-white text-sm font-semibold">Book a Visit</a>
+
+          <!-- Cart button -->
+          <button id="cart-btn" class="relative px-3 py-2 rounded-md border hover:bg-gray-50">
+            🛒 <span id="cart-count" class="cart-badge ml-2">0</span>
+          </button>
+
+          <!-- hamburger (right corner on mobile) -->
+          <button id="nav-toggle" class="md:hidden p-2 rounded-md hover:bg-gray-100" aria-label="Open menu">
+            <svg id="hamb" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t">
+      <div class="px-4 pt-4 pb-6 space-y-2">
+        <a href="#features" class="block">Features</a>
+        <a href="#inventory" class="block">Inventory</a>
+        <a href="#market" class="block">Shop</a>
+        <a href="#pricing" class="block">Pricing</a>
+        <a href="#contact" class="block">Contact</a>
+        <a href="#booking" class="block font-semibold text-[color:var(--brand)]">Book a Visit</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative">
+    <div class="hero-overlay bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1800&q=60');">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="max-w-2xl text-white">
+          <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">Healthy Birds, Smarter Farming</h1>
+          <p class="mt-4 text-lg text-gray-100/90">Manage batches, check mortality, track feed & sales — and sell your products online from one beautiful dashboard.</p>
+          <div class="mt-8 flex gap-3">
+            <a href="#features" class="px-5 py-3 bg-white rounded-md font-semibold">Explore Features</a>
+            <a href="#market" class="px-5 py-3 border border-white rounded-md font-semibold text-white">Visit Store</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10">
+    <!-- KEY BENEFITS -->
+    <section id="features" class="bg-white rounded-xl shadow p-6 -mt-8 mb-8">
+      <br><br>
+      <h2 class="text-2xl font-bold">Why FeatherField?</h2>
+      <p class="mt-2 text-gray-600">Built for small-to-medium poultry farmers who want automation + an online presence.</p>
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-4 border rounded-lg hover-lift">
+          <h3 class="font-semibold">Batch Management</h3>
+          <p class="mt-2 text-sm text-gray-600">Create batches, track age, vaccinations, and mortality dates.</p>
+        </div>
+        <div class="p-4 border rounded-lg hover-lift">
+          <h3 class="font-semibold">Sales & Orders</h3>
+          <p class="mt-2 text-sm text-gray-600">List live stock and processed products — accept orders online.</p>
+        </div>
+        <div class="p-4 border rounded-lg hover-lift">
+          <h3 class="font-semibold">Inventory & Feed</h3>
+          <p class="mt-2 text-sm text-gray-600">Track feed, medicine, and packaging with alerts for low stock.</p>
+        </div>
+        <div class="p-4 border rounded-lg hover-lift">
+          <h3 class="font-semibold">Reports & Exports</h3>
+          <p class="mt-2 text-sm text-gray-600">Profit analysis, mortality trends, and printable reports for vets or investors.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTORY & BATCH PREVIEW -->
+    <section id="inventory" class="mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 bg-white rounded-xl shadow p-6">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold">Active Batches</h3>
+          <button class="text-sm px-3 py-2 rounded bg-[color:var(--brand)] text-white">Add Batch</button>
+        </div>
+        <div class="mt-4 space-y-4">
+          <div class="p-4 border rounded-lg flex items-center gap-4">
+            <div class="w-20 h-20 rounded-md bg-yellow-50 flex items-center justify-center">🐣</div>
+            <div class="flex-1">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="font-semibold">Broiler Batch A1</h4>
+                  <div class="text-sm text-gray-500">Started: Aug 28, 2025 • Age: 18 days</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm text-gray-600">Birds: <span class="font-semibold">1200</span></div>
+                  <div class="text-sm text-red-500">Mortality: <span class="font-semibold">2</span></div>
+                </div>
+              </div>
+              <div class="mt-3 text-sm text-gray-600">Last vaccine: Gumboro (drink) • Next vaccination in 6 days</div>
+            </div>
+          </div>
+
+          <div class="p-4 border rounded-lg">Another batch card — customize fields (feed used, vaccine history, notes)</div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <aside class="bg-white rounded-xl shadow p-6">
+        <h4 class="font-semibold">Quick Stats</h4>
+        <ul class="mt-4 space-y-3 text-sm text-gray-600">
+          <li>Total birds: <span class="font-semibold">3,400</span></li>
+          <li>Mortality (30d): <span class="font-semibold text-red-500">12</span></li>
+          <li>Feed stock: <span class="font-semibold">2,200 kg</span></li>
+          <li>Pending orders: <span class="font-semibold text-[color:var(--accent)]">4</span></li>
+        </ul>
+        <div class="mt-6">
+          <a href="#reports" class="block text-center px-4 py-2 rounded bg-[color:var(--brand)] text-white">View Reports</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- SHOP / MARKET -->
+    <section id="market" class="mb-8 bg-white rounded-xl shadow p-6">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xl font-semibold">Farm Store</h3>
+        <div class="text-sm text-gray-500">Free pickup • Delivery available</div>
+      </div>
+
+      <!-- Products grid -->
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="products-grid">
+        <!-- Product template items (JS will also seed these) -->
+        <article class="border rounded-lg p-4 flex flex-col">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1505577058444-a3dab1b9f5b7?auto=format&fit=crop&w=800&q=60" alt="Farm Fresh Eggs" class="h-40 w-full object-cover rounded-md" />
+          <h4 class="mt-3 font-semibold">Farm Fresh Eggs (Tray)</h4>
+          <div class="mt-1 text-sm text-gray-600">Free-range, graded and packed</div>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="font-bold">$6.00</div>
+            <button class="px-3 py-1 rounded bg-[color:var(--brand)] text-white text-sm add-to-cart" data-id="eggs">Add</button>
+          </div>
+        </article>
+
+        <article class="border rounded-lg p-4 flex flex-col">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60" alt="Processed Chicken" class="h-40 w-full object-cover rounded-md" />
+          <h4 class="mt-3 font-semibold">Processed Chicken (1kg)</h4>
+          <div class="mt-1 text-sm text-gray-600">Hygienically processed and chilled</div>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="font-bold">$4.50</div>
+            <button class="px-3 py-1 rounded bg-[color:var(--brand)] text-white text-sm add-to-cart" data-id="chicken">Add</button>
+          </div>
+        </article>
+
+        <article class="border rounded-lg p-4 flex flex-col">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1585306873918-8a6b8e9f8b2b?auto=format&fit=crop&w=800&q=60" alt="Fresh Meat Pack" class="h-40 w-full object-cover rounded-md" />
+          <h4 class="mt-3 font-semibold">Whole Chicken (Fresh)</h4>
+          <div class="mt-1 text-sm text-gray-600">1.6kg avg, whole</div>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="font-bold">$7.50</div>
+            <button class="px-3 py-1 rounded bg-[color:var(--brand)] text-white text-sm add-to-cart" data-id="whole">Add</button>
+          </div>
+        </article>
+
+        <article class="border rounded-lg p-4 flex flex-col">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1592928304026-9b6f9d0a6b7b?auto=format&fit=crop&w=800&q=60" alt="Packaged Eggs" class="h-40 w-full object-cover rounded-md" />
+          <h4 class="mt-3 font-semibold">Packaged Eggs (6pcs)</h4>
+          <div class="mt-1 text-sm text-gray-600">Small pack</div>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="font-bold">$3.00</div>
+            <button class="px-3 py-1 rounded bg-[color:var(--brand)] text-white text-sm add-to-cart" data-id="eggs6">Add</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRICING / PACKAGES -->
+    <section id="pricing" class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 bg-white rounded-xl shadow">
+        <h4 class="font-semibold">Starter</h4>
+        <div class="mt-4 text-3xl font-bold">$9/mo</div>
+        <ul class="mt-4 text-sm text-gray-600 space-y-2">
+          <li>Batch tracking</li>
+          <li>Basic inventory</li>
+          <li>Email support</li>
+        </ul>
+        <a class="mt-6 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded">Choose</a>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow border-2 border-[color:var(--brand)]">
+        <h4 class="font-semibold">Grow</h4>
+        <div class="mt-4 text-3xl font-bold">$29/mo</div>
+        <ul class="mt-4 text-sm text-gray-600 space-y-2">
+          <li>Everything in Starter</li>
+          <li>Sales & orders</li>
+          <li>Printable reports</li>
+        </ul>
+        <a class="mt-6 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded">Choose</a>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow">
+        <h4 class="font-semibold">Pro</h4>
+        <div class="mt-4 text-3xl font-bold">$79/mo</div>
+        <ul class="mt-4 text-sm text-gray-600 space-y-2">
+          <li>Full analytics</li>
+          <li>Multi-farm support</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="mt-6 inline-block px-4 py-2 bg-[color:var(--brand)] text-white rounded">Choose</a>
+      </div>
+    </section>
+
+    <!-- CONTACT & BOOKING -->
+    <section id="contact" class="mb-12 bg-white rounded-xl shadow p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-xl font-semibold">Get in touch</h3>
+          <p class="mt-2 text-gray-600">Questions? Farm visits? Bulk orders? Fill the form and we'll reply within 24 hours.</p>
+          <dl class="mt-4 text-sm text-gray-700">
+            <dt class="font-semibold">Address</dt>
+            <dd class="mb-3">Riverside Farm, Migori County</dd>
+            <dt class="font-semibold">Phone</dt>
+            <dd class="mb-3">+254 7XX XXX XXX</dd>
+            <dt class="font-semibold">Email</dt>
+            <dd>hello@featherfield.example</dd>
+          </dl>
+        </div>
+
+        <form id="contact-form" class="space-y-3" onsubmit="event.preventDefault(); alert('Form submitted — integrate with backend or Google Sheets');">
+          <input id="contact-name" name="name" required class="w-full p-3 border rounded" placeholder="Full name">
+          <input id="contact-email" name="email" required type="email" class="w-full p-3 border rounded" placeholder="Email address">
+          <input id="contact-phone" name="phone" class="w-full p-3 border rounded" placeholder="Phone (optional)">
+          <textarea id="contact-message" name="message" required class="w-full p-3 border rounded" rows="4" placeholder="How can we help?"></textarea>
+          <div class="flex gap-3">
+            <button class="px-4 py-2 bg-[color:var(--brand)] text-white rounded">Send message</button>
+            <button type="button" class="px-4 py-2 border rounded" onclick="window.location='#booking'">Book a visit</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- SIMPLE FOOTER -->
+    <footer class="py-8 text-sm text-gray-600">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>© <strong>McOwino</strong> 2025 — Built for small farms.</div>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-[color:var(--brand)]">Privacy</a>
+          <a href="#" class="hover:text-[color:var(--brand)]">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- CART MODAL -->
+  <div id="cart-modal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="absolute inset-0 modal-backdrop" onclick="toggleCart(false)"></div>
+    <div class="relative w-full max-w-2xl bg-white rounded-lg shadow p-6 z-60">
+      <div class="flex justify-between items-center">
+        <h3 class="text-xl font-semibold">Your Cart</h3>
+        <button onclick="toggleCart(false)" class="text-gray-500">Close</button>
+      </div>
+      <div class="mt-4" id="cart-items-list"></div>
+
+      <div class="mt-4 flex justify-between items-center">
+        <div class="font-semibold">Total: <span id="cart-total">$0.00</span></div>
+        <div>
+          <button id="clear-cart" class="px-3 py-2 border rounded mr-2">Clear</button>
+          <button id="checkout-btn" class="px-3 py-2 bg-[color:var(--brand)] text-white rounded">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT FORM MODAL -->
+  <div id="checkout-modal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="absolute inset-0 modal-backdrop" onclick="toggleCheckout(false)"></div>
+    <div class="relative w-full max-w-lg bg-white rounded-lg shadow p-6 z-60">
+      <h3 class="text-xl font-semibold">Checkout</h3>
+      <form id="checkout-form" class="mt-4 space-y-3">
+        <input id="cust-name" name="name" required class="w-full p-3 border rounded" placeholder="Full name">
+        <input id="cust-email" name="email" required type="email" class="w-full p-3 border rounded" placeholder="Email address">
+        <input id="cust-phone" name="phone" class="w-full p-3 border rounded" placeholder="Phone">
+        <textarea id="cust-address" name="address" class="w-full p-3 border rounded" rows="2" placeholder="Delivery address / pickup instructions"></textarea>
+        <div class="flex justify-between items-center">
+          <div class="text-sm text-gray-600">Total: <strong id="checkout-total">$0.00</strong></div>
+          <div>
+            <button type="button" class="px-3 py-2 border rounded mr-2" onclick="toggleCheckout(false)">Cancel</button>
+            <button type="submit" class="px-3 py-2 bg-[color:var(--brand)] text-white rounded">Place Order</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // ---------- CONFIG ----------
+    // Replace with your deployed Google Apps Script Web App URL
+    const GSHEET_WEB_APP_URL = "https://script.google.com/macros/s/YOUR_DEPLOYED_WEBAPP_ID/exec";
+
+    // ---------- PRODUCTS (catalog) ----------
+    const CATALOG = {
+      eggs: { id: 'eggs', title: 'Farm Fresh Eggs (Tray)', price: 6.00 },
+      chicken: { id: 'chicken', title: 'Processed Chicken (1kg)', price: 4.50 },
+      whole: { id: 'whole', title: 'Whole Chicken (Fresh)', price: 7.50 },
+      eggs6: { id: 'eggs6', title: 'Packaged Eggs (6pcs)', price: 3.00 }
+    };
+
+    // ---------- CART STATE ----------
+    const CART_KEY = 'featherfield_cart_v1';
+    function loadCart() {
+      try { return JSON.parse(localStorage.getItem(CART_KEY) || '{}'); }
+      catch(e){ return {}; }
+    }
+    function saveCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateCartUI(); }
+    function cartCount(cart) {
+      return Object.values(cart).reduce((s,q)=>s+q,0);
+    }
+    function cartTotal(cart){
+      return Object.entries(cart).reduce((sum,[id,q])=> sum + (CATALOG[id].price * q), 0);
+    }
+
+    // ---------- UI Helpers ----------
+    function updateCartUI(){
+      const cart = loadCart();
+      document.getElementById('cart-count').innerText = cartCount(cart);
+      // render items list
+      const container = document.getElementById('cart-items-list');
+      container.innerHTML = '';
+      if(Object.keys(cart).length === 0){
+        container.innerHTML = '<div class="text-sm text-gray-600">Your cart is empty.</div>';
+      } else {
+        for(const [id,q] of Object.entries(cart)){
+          const p = CATALOG[id];
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between gap-4 py-2 border-b';
+          row.innerHTML = `
+            <div class="flex-1">
+              <div class="font-semibold">${p.title}</div>
+              <div class="text-sm text-gray-500">${q} × $${p.price.toFixed(2)}</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="px-2 py-1 border rounded qty-decr" data-id="${id}">-</button>
+              <div class="w-6 text-center">${q}</div>
+              <button class="px-2 py-1 border rounded qty-incr" data-id="${id}">+</button>
+              <button class="px-2 py-1 text-red-500 remove-item" data-id="${id}" title="Remove">✕</button>
+            </div>
+          `;
+          container.appendChild(row);
+        }
+      }
+      document.getElementById('cart-total').innerText = `$${cartTotal(cart).toFixed(2)}`;
+      document.getElementById('checkout-total').innerText = `$${cartTotal(cart).toFixed(2)}`;
+      // attach event listeners for qty buttons
+      document.querySelectorAll('.qty-incr').forEach(b => b.onclick = () => {
+        const id = b.dataset.id; const cart = loadCart(); cart[id] = (cart[id]||0) + 1; saveCart(cart);
+      });
+      document.querySelectorAll('.qty-decr').forEach(b => b.onclick = () => {
+        const id = b.dataset.id; const cart = loadCart();
+        if(!cart[id]) return;
+        cart[id] = Math.max(0, cart[id]-1);
+        if(cart[id] === 0) delete cart[id];
+        saveCart(cart);
+      });
+      document.querySelectorAll('.remove-item').forEach(b => b.onclick = () => {
+        const id = b.dataset.id; const cart = loadCart();
+        delete cart[id]; saveCart(cart);
+      });
+    }
+
+    // ---------- Add-to-cart buttons ----------
+    document.addEventListener('click', function(e){
+      if(e.target && e.target.classList.contains('add-to-cart')){
+        const id = e.target.dataset.id;
+        if(!CATALOG[id]) return alert('Item not found');
+        const cart = loadCart();
+        cart[id] = (cart[id] || 0) + 1;
+        saveCart(cart);
+        // tiny feedback
+        e.target.innerText = 'Added ✓';
+        setTimeout(()=> e.target.innerText = 'Add', 700);
+      }
+    });
+
+    // ---------- Cart modal toggle ----------
+    function toggleCart(show){
+      const modal = document.getElementById('cart-modal');
+      if(show === undefined) show = modal.classList.contains('hidden');
+      modal.classList.toggle('hidden', !show);
+      modal.classList.toggle('flex', show);
+      updateCartUI();
+    }
+    document.getElementById('cart-btn').addEventListener('click', ()=> toggleCart(true));
+    document.getElementById('clear-cart').addEventListener('click', () => {
+      if(confirm('Clear cart?')) { localStorage.removeItem(CART_KEY); updateCartUI(); }
+    });
+
+    // ---------- Checkout ----------
+    function toggleCheckout(show){
+      const modal = document.getElementById('checkout-modal');
+      if(show === undefined) show = modal.classList.contains('hidden');
+      modal.classList.toggle('hidden', !show);
+      modal.classList.toggle('flex', show);
+      // populate form totals
+      document.getElementById('checkout-total').innerText = `$${cartTotal(loadCart()).toFixed(2)}`;
+      // prefill name/email if present in contact form
+      const contactName = document.getElementById('contact-name').value;
+      const contactEmail = document.getElementById('contact-email').value;
+      if(contactName) document.getElementById('cust-name').value = contactName;
+      if(contactEmail) document.getElementById('cust-email').value = contactEmail;
+    }
+    document.getElementById('checkout-btn').addEventListener('click', ()=> {
+      if(cartCount(loadCart()) === 0) return alert('Your cart is empty.');
+      toggleCheckout(true);
+    });
+
+    // Checkout submit -> POST to Google Apps Script
+    document.getElementById('checkout-form').addEventListener('submit', async function(e){
+      e.preventDefault();
+      const cart = loadCart();
+      if(Object.keys(cart).length === 0) return alert('Cart empty.');
+      const items = Object.entries(cart).map(([id,q]) => ({ id, title: CATALOG[id].title, price: CATALOG[id].price, qty: q }));
+      const total = cartTotal(cart);
+      const payload = {
+        orderId: 'ORD-' + Date.now().toString(36).toUpperCase(),
+        createdAt: new Date().toISOString(),
+        customer: {
+          name: document.getElementById('cust-name').value,
+          email: document.getElementById('cust-email').value,
+          phone: document.getElementById('cust-phone').value,
+          address: document.getElementById('cust-address').value
+        },
+        items,
+        total
+      };
+
+      // Basic validation
+      if(!payload.customer.name || !payload.customer.email) {
+        return alert('Please provide name and email.');
+      }
+
+      // show loading
+      const btn = e.submitter;
+      const oldText = btn.innerText;
+      btn.disabled = true;
+      btn.innerText = 'Placing order...';
+
+      try {
+        const res = await fetch(GSHEET_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const text = await res.text(); // Apps Script returns text
+        if(res.ok) {
+          alert('Order placed! Order ID: ' + payload.orderId + '\nWe will contact you soon.\nResponse: ' + text);
+          // clear cart & close modals
+          localStorage.removeItem(CART_KEY);
+          updateCartUI();
+          toggleCheckout(false);
+          toggleCart(false);
+        } else {
+          alert('Failed to place order. Server said: ' + text);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Network error while placing order: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = oldText;
+      }
+    });
+
+    // ---------- Mobile menu ----------
+    document.getElementById('nav-toggle').addEventListener('click', function(){
+      const m = document.getElementById('mobile-menu');
+      m.classList.toggle('hidden');
+    });
+
+    // initialize cart count
+    updateCartUI();
+
+    // Auto-seed product grid if you want to render programmatically (optional)
+    // (not necessary since products are in HTML already)
+  </script>
+</body>
+</html>
