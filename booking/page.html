@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Visit</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --brand: #4CAF50;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(3px);
+    }
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 35px;
+      width: 95%;
+      max-width: 500px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      animation: fadeIn 1.2s ease;
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .intro-text {
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: #f1f1f1;
+      line-height: 1.5;
+    }
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.85);
+      font-size: 1rem;
+      color: #333;
+    }
+    .form-group textarea {
+      resize: none;
+      height: 100px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background: #43a047;
+      transform: translateY(-2px);
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .back-link:hover {
+      color: #fff;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="card">
+    <h1><i class="fa-solid fa-calendar-check"></i> Book a Visit</h1>
+    <p class="intro-text">
+      We look forward to welcoming you!  
+      Please fill in the details below to schedule your visit at a convenient time.  
+      Our team will confirm with you shortly.
+    </p>
+    <form id="visit-form">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email Address" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+      </div>
+      <div class="form-group">
+        <input type="date" name="date" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Additional Notes..."></textarea>
+      </div>
+      <button type="submit">Confirm Booking</button>
+    </form>
+    <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to Home</a>
+  </div>
+
+  <script>
+    document.getElementById('visit-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert("✅ Thank you! Your booking has been submitted. We will contact you soon.");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
