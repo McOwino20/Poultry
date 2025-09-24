@@ -433,7 +433,7 @@
       modal.classList.toggle('hidden', !show);
       modal.classList.toggle('flex', show);
       // populate form totals
-      document.getElementById('checkout-total').innerText = `$${cartTotal(loadCart()).toFixed(2)}`;
+      document.getElementById('checkout-total').innerText = `Ksh${cartTotal(loadCart()).toFixed(2)}`;
       // prefill name/email if present in contact form
       const contactName = document.getElementById('contact-name').value;
       const contactEmail = document.getElementById('contact-email').value;
