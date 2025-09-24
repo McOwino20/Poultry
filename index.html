@@ -380,7 +380,7 @@
           container.appendChild(row);
         }
       }
-      document.getElementById('cart-total').innerText = `$${cartTotal(cart).toFixed(2)}`;
+      document.getElementById('cart-total').innerText = `Ksh${cartTotal(cart).toFixed(2)}`;
       document.getElementById('checkout-total').innerText = `$${cartTotal(cart).toFixed(2)}`;
       // attach event listeners for qty buttons
       document.querySelectorAll('.qty-incr').forEach(b => b.onclick = () => {
